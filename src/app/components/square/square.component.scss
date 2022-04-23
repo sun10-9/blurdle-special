@@ -1,0 +1,38 @@
+.square {
+    height: 50px;
+    width: 50px;
+    margin: 10px 10px;
+    border: 4px solid #777;
+    display: flex;
+    justify-content: center;
+
+    .letter {
+        align-self: center;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+
+    &.empty {
+        background-color: #fff;
+        color: #000;
+    }
+    
+    &.green {
+        background-color: #4c923b;
+        border-color: #4c923b;
+        color: #fff;
+    }
+    
+    &.yellow {
+        background-color: #dfd000;
+        border-color:#dfd000;
+        color: #fff;
+    }
+    
+    &.grey {
+        background-color: #797979;
+        border-color:#797979;
+        color: #fff;
+    }
+}
