@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { LetterStatus } from '../models/words';
 import { GameService } from './game.service';
+import * as _ from 'lodash';
 
 @Injectable({
   providedIn: 'root'
@@ -51,7 +52,6 @@ export class LetterService {
         letterPos: index,
         status
       }
-      // console.log('hi1 - status:', status);
 
       this._receiveStatus.next(letterStatus);
     }
@@ -101,7 +101,7 @@ export class LetterService {
     // console.log('----------------------------');
     // console.log('hi6 - checking the letter', letterToCheck);
     // console.log('hi6 - does it exist in word?', this.isInWord(letterToCheck));
-    // console.log('hi6 - is it in the array:', this._wordArray, '?', this.isInWordArray(letterToCheck));
+    // console.log('hi6 - is it in the array:', _.cloneDeep(this._wordArray), '?', this.isInWordArray(letterToCheck));
     // console.log('hi6 - is it in correct position?', this.isLetterInCorrectPosition(letterToCheck, index));
     // console.log('----------------------------');
     if (this.isInWord(letterToCheck)) { // Does letter exist in word?
@@ -144,7 +144,7 @@ export class LetterService {
     let hitOnce = false;
     this._wordArray =
       this._wordArray.map((letterObj) => {
-        if (!hitOnce && letterObj.letter.toUpperCase() === letterToRemove.toUpperCase()) {
+        if (!hitOnce && !letterObj.hit && letterObj.letter.toUpperCase() === letterToRemove.toUpperCase()) {
           letterObj.hit = true;
           hitOnce = true;
         }
@@ -161,7 +161,7 @@ export class LetterService {
   // }
 
   private isInWordArray(letterToCheck: string) {
-    return this._wordArray.find((letterObj) => letterObj.letter.toUpperCase() === letterToCheck.toUpperCase() && !letterObj.hit);
+    return this._wordArray.find((letterObj) => (letterObj.letter.toUpperCase() === letterToCheck.toUpperCase()) && !letterObj.hit);
   }
 
   private isLetterInCorrectPosition(letterToCheck: string, index: number): boolean {

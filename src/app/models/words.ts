@@ -854,7 +854,6 @@ export const FiveLetterWords = [
     "Phone",
     "Place",
     "Point",
-    "Press",
     "Prove",
     "Raise",
     "Reach",
